@@ -1,31 +1,30 @@
 console.clear();
 const moduloFuncionesDeTareas = require('./modulos/funcionesDeTareas.js')
 const argv = require('process').argv;
-const accion = argv[2] === undefined ? undefined : argv[2].toLocaleLowerCase();
-
+require('colors');
+const accion = argv[2] === undefined ? undefined : argv[2].toLowerCase();
 switch (accion) {
     case 'listar':
-        console.log('Listado de tareas\n------------------');
+        console.log('------------------\nListado de tareas\n------------------'.green);
         moduloFuncionesDeTareas.listar();
-        //console.log(moduloFuncionesDeTareas.buscar('Repasar JS'));
+        console.log();
         break;
     case 'crear':
         console.log(moduloFuncionesDeTareas.crear(argv[3]));
         break;
     case 'filtrar':
-        console.log('Tareas ' + argv[3]);
+
+        console.log(('------------------------------------\nTareas ' + argv[3]).green);
         moduloFuncionesDeTareas.filtrarPorEstado(argv[3]);
+        console.log('------------------------------------\n'.green);
+        break;
+    case 'modificar':
+        moduloFuncionesDeTareas.modificarEstado(+argv[3], argv[4]);
         break;
     case (undefined):
-        console.log();
-        console.log('Atención - Tienes que pasarme una acción');
-        console.log('Las acciones disponibles son: listar');
-        console.log('----------------------------------------');
+        console.log('------------------------------------\nAtención - Tienes que pasarme una acción\nLas acciones disponibles son: listar,crear, filtrar\n----------------------------------------'.yellow);
         break;
     default:
-        console.log('------------------------------------');
-        console.log('No entiendo qué quieres hacer');
-        console.log('Las acciones disponibles son: listar,crear, filtrar');
-        console.log('------------------------------------');
+        console.log('------------------------------------\nNo entiendo qué quieres hacer\nLas acciones disponibles son: listar,crear, filtrar\n------------------------------------'.red);
         break;
 }

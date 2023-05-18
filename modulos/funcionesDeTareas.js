@@ -10,26 +10,43 @@ module.exports = {
             console.log(`${i + 1}. ${titulo} - ${estado}`)
         });
     },
-    buscar: function (titulo) {
-        return this.tareas.find((tarea) => tarea.titulo === titulo);
+    buscar: function (parametro, tipo) {
+        switch (tipo) {
+            case 'number':
+                return this.tareas.find((tarea, index) => {
+                    index + 1 === parametro
+                });
+            case 'titulo':
+                return this.tareas.find((tarea) => tarea.titulo.toLowerCase() === parametro.toLowerCase());
+            case 'estado':
+                return this.tareas.find((tarea, index) => index + 1 === parametro);
+        }
     },
     crear: function (titulo) {
-        let busqueda = this.buscar(titulo);
+        const busqueda = this.buscar(titulo, 'titulo');
         if (busqueda) {
-            return `No se puede crear la tarea por que ya existe\n`
+            return `No se puede crear la tarea por que ya existe\n`.red
         } else {
             const nuevaTarea = new Tarea(titulo);
             this.tareas.push(nuevaTarea);
             escribirJSON(this.tareas);
-            console.log('Nueva tarea creada\n------------------');
+            console.log('------------------\nNueva tarea creada\n------------------'.green);
             return `${nuevaTarea.titulo} - ${nuevaTarea.estado}\n`;
         }
     },
     filtrarPorEstado: function (estado) {
-        this.tareas.filter((tarea, index) => {
+        const resultado = this.tareas.filter((tarea, index) => {
             if (tarea.estado === estado) {
                 console.log(index + 1 + ". " + tarea.titulo);
             }
         });
+    },
+    modificarEstado: function (numeroTarea, nuevoEstado) {
+        const busqueda = this.buscar(numeroTarea, 'estado');
+        if (busqueda.estado.toLowerCase() !== nuevoEstado.toLowerCase()) {
+            busqueda.estado = nuevoEstado;
+            escribirJSON(this.tareas);
+            this.listar();
+        }
     },
 }
