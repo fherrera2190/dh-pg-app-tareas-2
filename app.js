@@ -13,10 +13,8 @@ switch (accion) {
         console.log(moduloFuncionesDeTareas.crear(argv[3]));
         break;
     case 'filtrar':
-
-        console.log(('------------------------------------\nTareas ' + argv[3]).green);
         moduloFuncionesDeTareas.filtrarPorEstado(argv[3]);
-        console.log('------------------------------------\n'.green);
+
         break;
     case 'modificar':
         moduloFuncionesDeTareas.modificarEstado(+argv[3], argv[4]);

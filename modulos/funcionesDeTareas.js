@@ -13,13 +13,16 @@ module.exports = {
     buscar: function (parametro, tipo) {
         switch (tipo) {
             case 'number':
-                return this.tareas.find((tarea, index) => {
+                return this.tareas.find((parametro, index) => {
                     index + 1 === parametro
                 });
             case 'titulo':
                 return this.tareas.find((tarea) => tarea.titulo.toLowerCase() === parametro.toLowerCase());
             case 'estado':
-                return this.tareas.find((tarea, index) => index + 1 === parametro);
+                const busqueda = this.tareas.filter(tarea => {
+                    return tarea.estado.toLowerCase() === parametro.toLowerCase()
+                });
+                return busqueda || null;
         }
     },
     crear: function (titulo) {
@@ -35,18 +38,26 @@ module.exports = {
         }
     },
     filtrarPorEstado: function (estado) {
-        const resultado = this.tareas.filter((tarea, index) => {
-            if (tarea.estado === estado) {
-                console.log(index + 1 + ". " + tarea.titulo);
-            }
-        });
+        console.log(estado)
+        const busqueda = this.buscar(estado, 'estado');
+        console.log(busqueda)
+        if (!busqueda) {
+            return ('No hay tareas con el estado: ' + estado).red;
+        } else {
+            console.log(('------------------------------------\nTareas ' + estado).green);
+            busqueda.forEach((tarea, index) => {
+                console.log(index + 1 + '. ' + tarea.titulo)
+
+            })
+            console.log('------------------------------------\n'.green);
+            return '';
+        }
     },
     modificarEstado: function (numeroTarea, nuevoEstado) {
-        const busqueda = this.buscar(numeroTarea, 'estado');
+        const busqueda = this.buscar(numeroTarea, 'number');
         if (busqueda.estado.toLowerCase() !== nuevoEstado.toLowerCase()) {
             busqueda.estado = nuevoEstado;
             escribirJSON(this.tareas);
-            this.listar();
         }
     },
 }
