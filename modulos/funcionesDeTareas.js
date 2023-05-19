@@ -61,7 +61,7 @@ module.exports = {
                 }
             });
             escribirJSON(nuevasTareas);
-            console.log(('-------------------------------\nSe elimino la Tarea N°' + numeroTarea + ' con exito\n-------------------------------').green);
+            console.log(('-------------------------------\nSe elimino la Tarea N°' + (numeroTarea+1) + ' con exito\n-------------------------------').green);
         }
     }
 }

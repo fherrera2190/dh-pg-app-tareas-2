@@ -16,11 +16,19 @@ switch (accion) {
     //Crea una tarea con el comando:
     //node app crear titulo
     case 'crear':
+        if (argv[3] === undefined) {
+            console.log('Error: no ingreso un titulo'.red);
+            break
+        }
         console.log(moduloFuncionesDeTareas.crear(argv[3]));
         break;
     //Muestras todas las tareas con el estado pasado como argumento
     //node app filtrar estado
     case 'filtrar':
+        if (argv[3] === undefined) {
+            console.log('Error: no ingreso un estado'.red);
+            break
+        }
         moduloFuncionesDeTareas.filtrarPorEstado(argv[3]);
         break;
     //Modifica el estado de una tarea con el comando :
@@ -46,7 +54,7 @@ switch (accion) {
         moduloFuncionesDeTareas.borrarTarea(+argv[3] - 1);
         break;
     case (undefined):
-        console.log('------------------------------------\nAtención - Tienes que pasarme una acción\nLas acciones disponibles son: listar,crear, filtrar\n----------------------------------------'.yellow);
+        console.log('------------------------------------\nAtención - Tienes que pasarme una acción\nLas acciones disponibles son: listar,crear, filtrar, modificar y borrar\n----------------------------------------'.yellow);
         break;
     default:
         console.log('------------------------------------\nNo entiendo qué quieres hacer\nLas acciones disponibles son: listar,crear, filtrar\n------------------------------------'.red);
