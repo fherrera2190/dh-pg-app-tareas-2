@@ -1,18 +1,14 @@
 [
    {
-      "titulo": "Repasar JS",
-      "estado": "Pendiente"
+       "titulo": "Repasar JS",
+       "estado": "terminada"
    },
    {
-      "titulo": "Armar aplicación de Tareas",
-      "estado": "En progreso"
+       "titulo": "Armar aplicación de Tareas",
+       "estado": "en progreso"
    },
    {
-      "titulo": "Break",
-      "estado": "pendiente"
-   },
-   {
-      "titulo": "Repasar Vue",
-      "estado": "pendiente"
+       "titulo": "Break",
+       "estado": "pendiente"
    }
 ]
