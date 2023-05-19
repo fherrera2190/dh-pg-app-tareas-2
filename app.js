@@ -5,7 +5,6 @@ require('colors');
 const accion = argv[2] === undefined ? undefined : argv[2].toLowerCase();
 
 switch (accion) {
-
     //Lista todas las tareas existente con el comando:
     //node app listart
     case 'listar':
@@ -47,7 +46,7 @@ switch (accion) {
     //Elimina una tarea con el comando :
     //node app borrar numeroDeTarea 
     case 'borrar':
-        if (+argv[3] < 1) {
+        if (+argv[3] < 1 || !argv[3]) {
             console.log("El no existe una terea en esa posicion".red)
             break;
         }
